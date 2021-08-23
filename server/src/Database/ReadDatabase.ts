@@ -1,10 +1,23 @@
-import database  from './Database';
+import database from './Database';
 
-async function getAllOrders() {
-    const res = await database.model('orders').findAll();
-
-    // @ts-ignore
-    console.log(await res[4].getItems());
+const detailedOrder = {
+    include: [
+        {
+            model: database.model('order_items'),
+            include: [database.model('products')]
+        }
+    ],
 }
 
-getAllOrders();
+async function getAllOrders() {
+    console.log(database.models);
+    const res = await database.model('orders').findAll(detailedOrder);
+    return res;
+}
+
+async function getSingleOrder(id: number) {
+    const findOneOptions = {where: {id: id}}
+    Object.assign(findOneOptions, detailedOrder);
+    const res = await database.model('orders').findOne( findOneOptions);
+    return res;
+}

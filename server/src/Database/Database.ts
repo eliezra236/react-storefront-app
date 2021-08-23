@@ -9,7 +9,6 @@ const sequelize = new Sequelize(
     dialect: "mysql",
     host: process.env.DB_HOST!,
     port: parseInt(process.env.DB_PORT!),
-    logging: false,
   }
 );
 
@@ -27,22 +26,17 @@ const sequelize = new Sequelize(
 const Product = sequelize.define(
   "products",
   {
-    product_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    product_name: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    product_price: {
+    price: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    product_description: DataTypes.STRING,
-    product_img: DataTypes.STRING(2100),
-    product_stock: DataTypes.INTEGER,
+    description: DataTypes.STRING,
+    img: DataTypes.STRING(2100),
+    stock: DataTypes.INTEGER,
   },
   { tableName: "products" }
 );
@@ -50,75 +44,38 @@ const Product = sequelize.define(
 const Customer = sequelize.define(
   "customers",
   {
-    customer_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    first_name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    last_name: DataTypes.STRING,
+    lastName: DataTypes.STRING,
   },
   { tableName: "customers" }
 );
 
 const Order = sequelize.define(
   "orders",
-  {
-    order_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    customer_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-  },
+  {},
   { tableName: "orders" }
 );
 
-const OrderItems = sequelize.define(
+Customer.hasMany(Order);
+Order.belongsTo(Customer);
+
+const OrderItem = sequelize.define(
   "order_items",
   {
-    order_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    product_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     quantity: DataTypes.INTEGER,
   },
   { tableName: "order_items" }
 );
 
-// Relations
+Order.hasMany(OrderItem);
+OrderItem.belongsTo(Order);
 
-let options = {
-  foreignKey: 'customer_id',
-  as: 'customer'
-};
+Product.hasMany(OrderItem);
+OrderItem.belongsTo(Product);
 
-// Order
-Customer.hasMany(Order, options);
-Order.belongsTo(Customer, options);
-
-
-// Order Items
-options.foreignKey = "order_id";
-options.as = "items"
-Order.hasMany(OrderItems, options);
-OrderItems.belongsTo(Order, options);
-
-options.foreignKey = 'product_id';
-options.as = 'product'
-Product.hasMany(OrderItems, options);
-OrderItems.belongsTo(Product, options);
-
-sequelize.sync({ alter: true });
+// sequelize.sync({force: true});
 
 export default sequelize;

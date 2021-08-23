@@ -1,42 +1,44 @@
-import database  from './Database';
-const products = require('./data/Products');
-const customers = require('./data/Customers');
+import database from './Database';
+import products from './data/Products';
+import customers from './data/Customers';
 
 async function initialCreate() {
-    database.model('customers').bulkCreate(customers);
-    database.model('products').bulkCreate(products);
+  await database.model('customers').bulkCreate(customers);
+  await database.model('products').bulkCreate(products);
 }
 
+// initialCreate();
+
+
 interface Item {
-  product_id: number,
+  productId: number,
   quantity: number
 }
 
-async function createOrder(customer_id: number, items: Array<Item>) {
+async function createOrder(customerId: number, items: Array<Item>) {
 
-    const newOrder = await database.model("orders").create({
-      customer_id: customer_id
-    });
+  const newOrder = await database.model("orders").create({
+    customerId: customerId
+  });
 
-    const orderItemsModel = database.model('order_items');
-    for(let item of items) {
-        await orderItemsModel.create({
-          order_id: newOrder.getDataValue('order_id'),
-          product_id: item.product_id,
-          quantity: item.quantity 
-        })
-    }
+  const orderItemsModel = database.model('order_items');
+  for (let item of items) {
+    await orderItemsModel.create({
+      orderId: newOrder.getDataValue('id'),
+      productId: item.productId,
+      quantity: item.quantity
+    })
+  }
 }
 
-createOrder(1, [{
-  product_id: 2,
-  quantity: 3,
-}, {product_id: 4, quantity: 5},
-])
+// createOrder(1, [
+//   { productId: 2, quantity: 3, },
+//   { productId: 4, quantity: 5 },
+// ])
 
-createOrder(2, [
-  {product_id: 1, quantity: 1,}, 
-  {product_id: 2, quantity: 2},
-])
+// createOrder(2, [
+//   { productId: 1, quantity: 1, },
+//   { productId: 2, quantity: 2 },
+// ])
 
 export { createOrder }
