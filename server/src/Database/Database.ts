@@ -1,5 +1,8 @@
-require('dotenv').config({ path: '../../../.env' })
+import envConfig from 'dotenv';
+envConfig.config({ path: '../../../.env' });
 import { Sequelize, DataTypes } from "sequelize";
+
+console.log(process.env.DB_USER);
 
 const sequelize = new Sequelize(
   process.env.DB_NAME!,

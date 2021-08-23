@@ -1,33 +1,27 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const database = require('./Database');
-const products = require('./data/Products');
-const customers = require('./data/Customers');
+exports.createOrder = void 0;
+const Database_1 = __importDefault(require("./Database"));
+const Products_1 = __importDefault(require("./data/Products"));
+const Customers_1 = __importDefault(require("./data/Customers"));
 async function initialCreate() {
-    database.model('customers').bulkCreate(customers);
-    database.model('products').bulkCreate(products);
+    await Database_1.default.model('customers').bulkCreate(Customers_1.default);
+    await Database_1.default.model('products').bulkCreate(Products_1.default);
 }
-async function createOrder(customer_id, items) {
-    const newOrder = await database.model("orders").create({
-        customer_id: customer_id
+async function createOrder(customerId, items) {
+    const newOrder = await Database_1.default.model("orders").create({
+        customerId: customerId
     });
-    const orderItemsModel = database.model('orderItems');
+    const orderItemsModel = Database_1.default.model('order_items');
     for (let item of items) {
         await orderItemsModel.create({
-            order_id: newOrder.getDataValue('order_id'),
-            product_id: item.product_id,
+            orderId: newOrder.getDataValue('id'),
+            productId: item.productId,
             quantity: item.quantity
         });
     }
 }
-createOrder(1, [{
-        product_id: 2,
-        quantity: 3,
-    }, { product_id: 4, quantity: 5 },
-]);
-createOrder(2, [
-    { product_id: 1, quantity: 1, },
-    { product_id: 2, quantity: 2 },
-]);
-// createOrder(2, [{product_id: 1,}])
 exports.createOrder = createOrder;

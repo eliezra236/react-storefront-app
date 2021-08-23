@@ -1,17 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Product {
-    product_name;
-    product_price;
-    product_description;
-    product_img;
-    product_stock;
-    constructor(product_name, product_price, product_description, product_img, product_stock) {
-        this.product_name = product_name;
-        this.product_price = product_price;
-        this.product_description = product_description;
-        this.product_img = product_img;
-        this.product_stock = product_stock;
+    name;
+    price;
+    description;
+    img;
+    stock;
+    constructor(name, price, description, img, stock) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.img = img;
+        this.stock = stock;
     }
 }
 const products = [
