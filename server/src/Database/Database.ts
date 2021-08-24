@@ -79,6 +79,6 @@ OrderItem.belongsTo(Order);
 Product.hasMany(OrderItem);
 OrderItem.belongsTo(Product);
 
-// sequelize.sync({force: true});
+sequelize.sync({force: true});
 
 export default sequelize;
