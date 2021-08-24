@@ -1,11 +1,12 @@
 import "../styles/App.css";
 import axios from "axios";
 
+axios
+  .post("http://localhost:5000/products", { test: "hello world" })
+  .then((res) => console.log(res))
+  .catch((err) => console.log(err));
+
 function App() {
-  axios
-    .get("http://localhost:5000/products")
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
   return <div className="App">Hello World</div>;
 }
 

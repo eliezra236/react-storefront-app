@@ -1,6 +1,7 @@
 import database from "./Database";
 import products from "./data/Products";
 import customers from "./data/Customers";
+import { IProduct } from './interfaces';
 
 async function initialCreateProducts() {
   await database.model("customers").bulkCreate(customers);
@@ -43,21 +44,8 @@ async function createOrder(customerId: number, items: Array<IOrderItem>) {
   }
 }
 
-interface IProduct {
-  name: string;
-  price: number;
-  description: string;
-  img: string;
-  stock: number;
-}
-
 async function addProduct(newProduct: IProduct) {
-  let res;
-  try {
-    res = await database.model("products").create(newProduct);
-  } catch (err) {
-    return false;
-  }
+  const res = await database.model("products").create(newProduct);
 
   return res.get({ plain: true });
 }
@@ -69,7 +57,7 @@ async function editProduct(id: number, newProduct: IProduct) {
     Object.assign(record, newProduct);
     await record?.save();
   } catch (err) {
-    console.log("couldn't edit ", newProduct, " at id ", id)
+    console.log("couldn't edit ", newProduct, " at id ", id);
     return err;
   }
   return record;
@@ -78,8 +66,8 @@ async function editProduct(id: number, newProduct: IProduct) {
 async function deleteProduct(id: number) {
   // paranoid is set to true, so it just soft delete.
   try {
-    await database.model('products').destroy({where: {id: id}});
-  } catch(err) {
+    await database.model("products").destroy({ where: { id: id } });
+  } catch (err) {
     return err;
   }
   return true;
