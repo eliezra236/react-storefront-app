@@ -3,11 +3,12 @@ import database from "./Database";
 // All read options plain:true remove all the meta data (prevResults, etc...) to make it lighter as JSON.
 
 // Options in order to make the query return the foregin keys as well, to get full order details
+// Set paranoid to false to get product info even if product was deleted.
 const detailedOrder = {
   include: [
     {
       model: database.model("order_items"),
-      include: [database.model("products")],
+      include: [{ model: database.model("products"), paranoid: false }],
     },
   ],
 };
@@ -27,9 +28,26 @@ async function getSingleOrder(id: number) {
 }
 
 async function getAllProducts() {
-  const res = await database.model("products").findAll({ raw: true });
+  let res;
+  try {
+    res = await database.model("products").findAll({ raw: true });
+  } catch(err) {
+    console.log("Error at getAllProducts")
+    res = err;
+  }
   return res;
 }
 
+async function getSingleProduct(id: number) {
+  let res;
+  try {
+    res = await database.model('products').findOne({where: {id: id}})
+  } catch(err) {
+    console.log("Error at getSingleProduct with id ", id)
+    res = err;
+  }
+  return res;
+  
+}
 
-export default { getAllOrders, getSingleOrder, getAllProducts };
+export default { getAllOrders, getSingleOrder, getAllProducts, getSingleProduct };

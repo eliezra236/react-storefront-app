@@ -2,7 +2,6 @@ import envConfig from 'dotenv';
 envConfig.config({ path: '../../../.env' });
 import { Sequelize, DataTypes } from "sequelize";
 
-console.log(process.env.DB_USER);
 
 const sequelize = new Sequelize(
   process.env.DB_NAME!,
@@ -12,6 +11,7 @@ const sequelize = new Sequelize(
     dialect: "mysql",
     host: process.env.DB_HOST!,
     port: parseInt(process.env.DB_PORT!),
+    logging: false,
   }
 );
 
@@ -41,7 +41,7 @@ const Product = sequelize.define(
     img: DataTypes.STRING(2100),
     stock: DataTypes.INTEGER,
   },
-  { tableName: "products" }
+  { tableName: "products", paranoid: true }
 );
 
 const Customer = sequelize.define(
@@ -79,6 +79,7 @@ OrderItem.belongsTo(Order);
 Product.hasMany(OrderItem);
 OrderItem.belongsTo(Product);
 
-sequelize.sync({force: true});
+// uncomment on first load
+sequelize.sync({alter: true});
 
 export default sequelize;

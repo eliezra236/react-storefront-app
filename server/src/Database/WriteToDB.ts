@@ -8,12 +8,12 @@ async function initialCreateProducts() {
 }
 
 async function initialCreateOrders() {
-  createOrder(1, [
+  await createOrder(1, [
     { productId: 2, quantity: 3 },
     { productId: 4, quantity: 5 },
   ]);
 
-  createOrder(2, [
+  await createOrder(2, [
     { productId: 1, quantity: 1 },
     { productId: 2, quantity: 2 },
   ]);
@@ -23,12 +23,12 @@ async function initialCreateOrders() {
 // initialCreateProducts();
 // initialCreateOrders();
 
-interface Item {
+interface IOrderItem {
   productId: number;
   quantity: number;
 }
 
-async function createOrder(customerId: number, items: Array<Item>) {
+async function createOrder(customerId: number, items: Array<IOrderItem>) {
   const newOrder = await database.model("orders").create({
     customerId: customerId,
   });
@@ -43,4 +43,46 @@ async function createOrder(customerId: number, items: Array<Item>) {
   }
 }
 
-export default { createOrder };
+interface IProduct {
+  name: string;
+  price: number;
+  description: string;
+  img: string;
+  stock: number;
+}
+
+async function addProduct(newProduct: IProduct) {
+  let res;
+  try {
+    res = await database.model("products").create(newProduct);
+  } catch (err) {
+    return false;
+  }
+
+  return res.get({ plain: true });
+}
+
+async function editProduct(id: number, newProduct: IProduct) {
+  let record;
+  try {
+    record = await database.model("products").findOne({ where: { id: id } });
+    Object.assign(record, newProduct);
+    await record?.save();
+  } catch (err) {
+    console.log("couldn't edit ", newProduct, " at id ", id)
+    return err;
+  }
+  return record;
+}
+
+async function deleteProduct(id: number) {
+  // paranoid is set to true, so it just soft delete.
+  try {
+    await database.model('products').destroy({where: {id: id}});
+  } catch(err) {
+    return err;
+  }
+  return true;
+}
+
+export default { createOrder, addProduct, editProduct, deleteProduct };
