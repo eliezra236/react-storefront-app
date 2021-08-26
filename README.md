@@ -18,6 +18,8 @@ And run it.
 
 2. Uncomment the initialCreate calls on server/src/database/writeToDB.ts and run it.
 
+### Setting up Frontend (React)
 
+1. Change client/src/variables/myAxios to your server URL
 
 

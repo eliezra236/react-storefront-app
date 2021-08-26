@@ -29,14 +29,14 @@ app
     const dbRes = await readDB.getAllProducts();
     res.send(dbRes);
   })
-  .post(async (req, res, next) => {
+  .post(async (req, res) => {
     // test it with axios
     console.log(req.body);
     try {
       const dbRes = await writeToDB.addProduct(req.body);
       res.send(res);
     } catch(err) {
-      res.status(422).send({ message: "Incorrect Product, please follow the schema", schema: JSON.stringify(IProduct)})
+      res.status(422).send({ message: "Incorrect Product, please follow the schema"})
     }
   });
 

@@ -1,13 +1,12 @@
 import "../styles/App.css";
-import axios from "axios";
-
-axios
-  .post("http://localhost:5000/products", { test: "hello world" })
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err));
+import ItemsTable from "./ItemsTable";
 
 function App() {
-  return <div className="App">Hello World</div>;
+  return (
+    <div className="App">
+      <ItemsTable />
+    </div>
+  );
 }
 
 export default App;
