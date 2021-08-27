@@ -16,41 +16,33 @@ function ItemsTable() {
         setProducts(res.data);
       })
       .catch((err) =>
-        alert("There was a problem loading the products, please try again"),
+        alert("There was a problem loading the products, please try again")
       );
   }
 
   function deleteItem(id) {
-    // TODO: delete item from DB
-    setProducts((oldProducts) => {
-      return oldProducts.filter((product) => product.id !== id);
-    });
+    console.log("got id", id)
+    axios
+      .delete("/products/" + id)
+      .then((res) => getProducts())
+      .catch((err) => alert(err));
   }
 
   function addProduct(productData) {
-    // TODO add item to DB
-    setProducts((oldProducts) => {
-      return [...oldProducts, productData];
-    });
+    axios
+      .post("/products", productData)
+      .then((res) => getProducts())
+      .catch((err) => alert(err));
   }
 
   function updateProduct(id, updatedProduct) {
     // TODO update item at DB.
   }
 
-  function testSubmit(event) {
-    console.log(event.currentTarget);
-    event.preventDefault();
-  }
-
   return (
     <div>
       <h3>All Products</h3>
-      <form onSubmit={testSubmit}>
-        <label htmlFor="testInput">user</label>
-        <input id="testInput" type="text" />
-        <button type="submit">submit</button>
-      </form>
+
       <AddModal submitForm={addProduct} />
       <table>
         <thead>
@@ -66,10 +58,12 @@ function ItemsTable() {
           {products.map((product) => (
             <TableItem
               key={product.id}
+              id={product.id}
               title={product.name}
               price={product.price}
               desc={product.description}
               image={product.img}
+              deleteFunction={deleteItem}
             />
           ))}
         </tbody>

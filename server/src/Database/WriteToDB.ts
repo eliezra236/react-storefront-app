@@ -65,11 +65,8 @@ async function editProduct(id: number, newProduct: IProduct) {
 
 async function deleteProduct(id: number) {
   // paranoid is set to true, so it just soft delete.
-  try {
-    await database.model("products").destroy({ where: { id: id } });
-  } catch (err) {
-    return err;
-  }
+  await database.model("products").destroy({ where: { id: id } });
+  
   return true;
 }
 

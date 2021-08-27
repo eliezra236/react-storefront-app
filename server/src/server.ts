@@ -30,18 +30,14 @@ app
     res.send(dbRes);
   })
   .post(async (req, res) => {
-    // test it with axios
-    console.log(req.body);
     try {
       const dbRes = await writeToDB.addProduct(req.body);
-      res.send(res);
+      res.send("Item was added successfully");
     } catch(err) {
+      console.log("failed", err)
       res.status(422).send({ message: "Incorrect Product, please follow the schema"})
     }
   });
-
-
-
 
 // requests for specific product
 
@@ -56,6 +52,10 @@ app
     res.send(true);
   })
   .delete(async (req, res) => {
+    try {
     const dbRes = await writeToDB.deleteProduct(parseInt(req.params.id));
     res.send(dbRes);
+    } catch(err) {
+      res.status(400).send({ message: "couldn't delete, check your schema"})
+    }
   });
