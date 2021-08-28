@@ -50,17 +50,17 @@ async function addProduct(newProduct: IProduct) {
   return res.get({ plain: true });
 }
 
-async function editProduct(id: number, newProduct: IProduct) {
+async function editProduct(id: number, editedProduct: IProduct) {
   let record;
   try {
     record = await database.model("products").findOne({ where: { id: id } });
-    Object.assign(record, newProduct);
+    Object.assign(record, editedProduct);
     await record?.save();
   } catch (err) {
-    console.log("couldn't edit ", newProduct, " at id ", id);
+    console.log("couldn't edit ", editedProduct, " at id ", id);
     return err;
   }
-  return record;
+  return record.get({plain: true});
 }
 
 async function deleteProduct(id: number) {

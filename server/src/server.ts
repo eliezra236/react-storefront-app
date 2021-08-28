@@ -48,8 +48,12 @@ app
     res.send(dbRes);
   })
   .put(async (req, res) => {
-    // TODO: test with Axios
-    res.send(true);
+    try {
+      const dbRes = await writeToDB.editProduct(parseInt(req.params.id), req.body)
+      res.send("Edit Was successfull");
+    } catch(err) {
+      res.status(400).send({ message: "couldn't edit, check your schema"})
+    }
   })
   .delete(async (req, res) => {
     try {

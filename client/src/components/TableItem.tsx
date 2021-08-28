@@ -1,12 +1,14 @@
 import React from "react";
+import EditItemModal from "./EditItemModal";
 
 function TableItem(props: {
   id: any;
-  title: string;
+  name: string;
   price: number;
-  desc: string;
+  description: string;
   image: string;
   deleteFunction: (id: number) => void;
+  editFunction: (id: number, editedItem: {any}) => void;
 }) {
   function handleDelete() {
     props.deleteFunction(props.id)
@@ -16,11 +18,11 @@ function TableItem(props: {
       <td>
         <img src={props.image} alt="Product" />
       </td>
-      <td>{props.title}</td>
+      <td>{props.name}</td>
       <td>{props.price}</td>
-      <td>{props.desc}</td>
+      <td>{props.description}</td>
       <td>
-        <button>Edit</button>
+        <EditItemModal itemProps={props}/>
         <button onClick={handleDelete}>Delete</button>
       </td>
     </tr>

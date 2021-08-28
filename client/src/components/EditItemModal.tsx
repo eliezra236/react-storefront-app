@@ -1,35 +1,38 @@
 import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-function AddModal(props: { submitForm: (productData) => void }) {
+function EditItemModal(props: { itemProps }) {
+  const itemProps = props.itemProps;
   // Modal Set up
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const closeModal = () => setShow(false);
+  const showModal = () => setShow(true);
 
   // Form variables
-  const [name, setName] = useState<string>("");
-  const [price, setPrice] = useState<number>(0);
-  const [desc, setDesc] = useState<string>("");
-  const [img, setImg] = useState<string>("");
+  const [name, setName] = useState<string>(itemProps.name);
+  const [price, setPrice] = useState<number>(itemProps.price);
+  const [description, setDesc] = useState<string>(itemProps.description);
+  const [img, setImg] = useState<string>(itemProps.image);
 
   function handleSubmit(event) {
     event.preventDefault();
-    const formData = {name, price, description: desc, img}
-    props.submitForm(formData);
-    handleClose();
+    const formData = { name, price, description, img };
+    itemProps.editFunction(itemProps.id, formData)
+    closeModal();
+    return;
   }
+
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
-        Add
+      <Button variant="primary" onClick={showModal}>
+        Edit
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={closeModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Add New Product</Modal.Title>
+          <Modal.Title>Edit Item</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
@@ -53,19 +56,20 @@ function AddModal(props: { submitForm: (productData) => void }) {
               <Form.Label>Description</Form.Label>
               <Form.Control
                 type="text"
-                value={desc}
+                value={description}
                 onChange={(e) => setDesc(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Img</Form.Label>
-              <Form.Control 
-              type="text" 
-              value={img}
-              onChange={e => setImg(e.target.value)} />
+              <Form.Control
+                type="text"
+                value={img}
+                onChange={(e) => setImg(e.target.value)}
+              />
             </Form.Group>
-            <Button type="submit">Add New Item</Button>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button type="submit">Save Changes</Button>
+            <Button variant="secondary" onClick={closeModal}>
               Cancel
             </Button>
           </Form>
@@ -75,4 +79,4 @@ function AddModal(props: { submitForm: (productData) => void }) {
   );
 }
 
-export default AddModal;
+export default EditItemModal;

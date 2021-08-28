@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TableItem from "./TableItem";
 import axios from "../variables/myAxios";
-import AddModal from "./AddModal";
+import AddModal from "./AddItemModal";
 
 function ItemsTable() {
   const [products, setProducts] = useState([]);
@@ -20,8 +20,7 @@ function ItemsTable() {
       );
   }
 
-  function deleteItem(id) {
-    console.log("got id", id)
+  function deleteItem(id: any) {
     axios
       .delete("/products/" + id)
       .then((res) => getProducts())
@@ -35,7 +34,11 @@ function ItemsTable() {
       .catch((err) => alert(err));
   }
 
-  function updateProduct(id, updatedProduct) {
+  function editItem(id, editedProduct) {
+    axios
+    .put("/products/" + id, editedProduct)
+    .then(res => getProducts())
+    .catch(err => alert(err))
     // TODO update item at DB.
   }
 
@@ -48,7 +51,7 @@ function ItemsTable() {
         <thead>
           <tr>
             <th>Image</th>
-            <th>Title</th>
+            <th>Name</th>
             <th>Price</th>
             <th>Description</th>
             <th>Options</th>
@@ -59,11 +62,12 @@ function ItemsTable() {
             <TableItem
               key={product.id}
               id={product.id}
-              title={product.name}
+              name={product.name}
               price={product.price}
-              desc={product.description}
+              description={product.description}
               image={product.img}
               deleteFunction={deleteItem}
+              editFunction={editItem}  
             />
           ))}
         </tbody>
