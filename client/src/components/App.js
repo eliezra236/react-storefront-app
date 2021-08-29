@@ -1,8 +1,8 @@
 import "../styles/App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import TopNavbar from "./global/TopNavbar";
-import Admin from "./pages/Admin.tsx";
-import Home from "./pages/Home.tsx";
+import Admin from "./pages/Admin/Admin.tsx";
+import Home from "./pages/Home/Home.tsx";
 
 function App() {
   return (

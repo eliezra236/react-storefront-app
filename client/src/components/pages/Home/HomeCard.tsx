@@ -10,12 +10,13 @@ function HomeCard(props: {
     price: number;
     description: string;
     img: string;
-    quantity: 1;
   };
   addToCart: (item) => void;
 }) {
+
+  const [quantity, setQuantity] = useState(1);
   function handleAddToCart() {
-    props.addToCart(props.info);
+    props.addToCart(Object.assign({quantity}, props.info));
   }
 
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import ItemsTable from "../ItemsTable";
+import ItemsTable from "./ItemsTable";
 
 function Admin() {
   return (

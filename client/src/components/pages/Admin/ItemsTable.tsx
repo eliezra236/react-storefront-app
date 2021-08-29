@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TableItem from "./TableItem";
-import axios from "../variables/myAxios";
+import axios from "../../../variables/myAxios";
 import AddModal from "./AddItemModal";
 
 function ItemsTable() {
