@@ -92,9 +92,9 @@ app.route("/orders").post((req, res) => {
 
 
 // REQUEST FOR STATISTICS
-app.get("/stats/uniquebestselling/:limit", (req, res) => {
+app.get("/stats/uniquebestselling/:limit", async (req, res) => {
   try {
-    const dbRes = readDB.getUniqueBestSelling(parseInt(req.params.limit));
+    const dbRes = await readDB.getUniqueBestSelling(parseInt(req.params.limit));
     res.send(dbRes);
   }
   catch(err) {
@@ -102,9 +102,9 @@ app.get("/stats/uniquebestselling/:limit", (req, res) => {
   }
 })
 
-app.get("/stats/bestselling/:limit", (req, res) => {
+app.get("/stats/bestselling/:limit", async (req, res) => {
   try {
-    const dbRes = readDB.getBestSelling(parseInt(req.params.limit));
+    const dbRes = await readDB.getBestSelling(parseInt(req.params.limit));
     res.send(dbRes);
   }
   catch(err) {
@@ -113,9 +113,9 @@ app.get("/stats/bestselling/:limit", (req, res) => {
 })
 
 
-app.get("/stats/lastdayssales/:days", (req, res) => {
+app.get("/stats/lastdayssales/:days", async (req, res) => {
   try {
-    const dbRes = readDB.getLastDaysSales(parseInt(req.params.days));
+    const dbRes = await readDB.getLastDaysSales(parseInt(req.params.days));
     res.send(dbRes);
   }
   catch(err) {

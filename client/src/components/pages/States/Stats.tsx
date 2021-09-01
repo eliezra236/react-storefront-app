@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../../variables/myAxios";
+import BestSellingCard from "./BestSellingCard";
+import DailySalesCard from "./DailySalesCard";
+import UniqueSalesCard from "./UniqueSalesCard";
 
 function Stats() {
   const [bestSelling, setBestSelling] = useState([]);
@@ -29,13 +32,16 @@ function Stats() {
   function getLastDaysSales() {
     axios
       .get("/stats/lastdayssales/5")
-      .then((res) => setLastDaysSales(res.data))
+      .then((res) => {
+        console.log(res.data)
+        setLastDaysSales(res.data)})
       .catch((err) => alert(err));
   }
-
   return (
     <div>
-      <table></table>
+      <BestSellingCard sellInfo={bestSelling} />
+      <UniqueSalesCard sellInfo={uniqueBestSelling} />
+      <DailySalesCard sellInfo={lastDaysSales} />
     </div>
   );
 }
