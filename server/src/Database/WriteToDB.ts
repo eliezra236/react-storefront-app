@@ -10,13 +10,13 @@ async function initialCreateProducts() {
 
 async function initialCreateOrders() {
   await createOrder(1, [
-    { productId: 2, quantity: 3 },
-    { productId: 4, quantity: 5 },
+    { productId: 2, quantity: 3, totalPrice: 3 },
+    { productId: 4, quantity: 5, totalPrice: 5 },
   ]);
 
   await createOrder(2, [
-    { productId: 1, quantity: 1 },
-    { productId: 2, quantity: 2 },
+    { productId: 1, quantity: 1, totalPrice: 5 },
+    { productId: 2, quantity: 2, totalPrice: 2 },
   ]);
 }
 
@@ -27,6 +27,7 @@ async function initialCreateOrders() {
 interface IOrderItem {
   productId: number;
   quantity: number;
+  totalPrice: number;
 }
 
 async function createOrder(customerId: number, items: Array<IOrderItem>) {
@@ -40,6 +41,7 @@ async function createOrder(customerId: number, items: Array<IOrderItem>) {
       orderId: newOrder.getDataValue("id"),
       productId: item.productId,
       quantity: item.quantity,
+      totalPrice: item.totalPrice,
     });
   }
 }
@@ -69,5 +71,7 @@ async function deleteProduct(id: number) {
   
   return true;
 }
+
+
 
 export default { createOrder, addProduct, editProduct, deleteProduct };

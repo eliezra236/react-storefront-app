@@ -13,10 +13,10 @@ function HomeCard(props: {
   };
   addToCart: (item) => void;
 }) {
-
+  // Give option to change added quantity from here.
   const [quantity, setQuantity] = useState(1);
   function handleAddToCart() {
-    props.addToCart(Object.assign({quantity}, props.info));
+    props.addToCart(Object.assign({ quantity }, props.info));
   }
 
   return (

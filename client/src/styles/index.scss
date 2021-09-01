@@ -36,3 +36,20 @@ table {
     height: 10rem;
   }
 }
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-remove-button {
+  color: red;
+  font-weight: bold;
+  padding: 0;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}

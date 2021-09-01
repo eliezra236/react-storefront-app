@@ -17,8 +17,9 @@ function TopNavbar() {
             <Nav.Link as={Link} to="/admin">
               Admin
             </Nav.Link>
-            <Nav.Link href="/features">Features</Nav.Link>
-            <Nav.Link href="/pricing">Pricing</Nav.Link>
+            <Nav.Link as={Link} to="/stats">
+              Stats
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>

@@ -69,6 +69,7 @@ const OrderItem = sequelize.define(
   "order_items",
   {
     quantity: DataTypes.INTEGER,
+    totalPrice: DataTypes.FLOAT,
   },
   { tableName: "order_items" }
 );
