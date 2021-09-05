@@ -17,13 +17,13 @@ function AddModal(props: { submitForm: (productData) => void }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const formData = {name, price, description, img}
+    const formData = { name, price, description, img };
     props.submitForm(formData);
     handleClose();
   }
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className="mb-3" variant="primary" onClick={handleShow}>
         Add
       </Button>
 
@@ -59,10 +59,11 @@ function AddModal(props: { submitForm: (productData) => void }) {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Img</Form.Label>
-              <Form.Control 
-              type="text" 
-              value={img}
-              onChange={e => setImg(e.target.value)} />
+              <Form.Control
+                type="text"
+                value={img}
+                onChange={(e) => setImg(e.target.value)}
+              />
             </Form.Group>
             <Button type="submit">Add New Item</Button>
             <Button variant="secondary" onClick={handleClose}>

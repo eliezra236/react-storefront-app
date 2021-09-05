@@ -16,7 +16,7 @@ function ItemsTable() {
         setProducts(res.data);
       })
       .catch((err) =>
-        alert("There was a problem loading the products, please try again")
+        alert("There was a problem loading the products, please try again"),
       );
   }
 
@@ -36,9 +36,9 @@ function ItemsTable() {
 
   function editItem(id, editedProduct) {
     axios
-    .put("/products/" + id, editedProduct)
-    .then(res => getProducts())
-    .catch(err => alert(err))
+      .put("/products/" + id, editedProduct)
+      .then((res) => getProducts())
+      .catch((err) => alert(err));
     // TODO update item at DB.
   }
 
@@ -67,7 +67,7 @@ function ItemsTable() {
               description={product.description}
               image={product.img}
               deleteFunction={deleteItem}
-              editFunction={editItem}  
+              editFunction={editItem}
             />
           ))}
         </tbody>

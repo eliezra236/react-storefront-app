@@ -33,15 +33,20 @@ function Stats() {
     axios
       .get("/stats/lastdayssales/5")
       .then((res) => {
-        console.log(res.data)
-        setLastDaysSales(res.data)})
+        console.log(res.data);
+        setLastDaysSales(res.data);
+      })
       .catch((err) => alert(err));
   }
   return (
     <div>
-      <BestSellingCard sellInfo={bestSelling} />
-      <UniqueSalesCard sellInfo={uniqueBestSelling} />
-      <DailySalesCard sellInfo={lastDaysSales} />
+      <h3>Statistics</h3>
+
+      <div className="stats-tables">
+        <BestSellingCard sellInfo={bestSelling} />
+        <UniqueSalesCard sellInfo={uniqueBestSelling} />
+        <DailySalesCard sellInfo={lastDaysSales} />
+      </div>
     </div>
   );
 }

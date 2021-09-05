@@ -13,8 +13,9 @@ code {
 }
 
 table, td, th {
-  border: 1px solid black;
-  border-collapse: collapse;
+  // border: 1px solid black;
+  // border-collapse: collapse;
+  padding: 0.7rem 1rem;
 }
 
 img {
@@ -27,8 +28,10 @@ td {
   height: 4rem;
 }
 
-table {
-  margin: auto;
+.stats-tables {
+  padding: 0rem 5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .home-card {

@@ -1,5 +1,6 @@
 import React from "react";
 import EditItemModal from "./EditItemModal";
+import Button from "react-bootstrap/Button";
 
 function TableItem(props: {
   id: any;
@@ -8,10 +9,10 @@ function TableItem(props: {
   description: string;
   image: string;
   deleteFunction: (id: number) => void;
-  editFunction: (id: number, editedItem: {any}) => void;
+  editFunction: (id: number, editedItem: { any }) => void;
 }) {
   function handleDelete() {
-    props.deleteFunction(props.id)
+    props.deleteFunction(props.id);
   }
   return (
     <tr>
@@ -21,9 +22,13 @@ function TableItem(props: {
       <td>{props.name}</td>
       <td>{props.price}</td>
       <td>{props.description}</td>
-      <td>
-        <EditItemModal itemProps={props}/>
-        <button onClick={handleDelete}>Delete</button>
+      <td className="options-td">
+        <div className="buttons-container">
+          <EditItemModal itemProps={props} />
+          <Button className="ms-4" variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </div>
       </td>
     </tr>
   );

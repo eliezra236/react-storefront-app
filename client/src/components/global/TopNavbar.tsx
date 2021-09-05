@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 function TopNavbar() {
   return (
     <div>
-      <Navbar bg="light" variant="light">
+      <Navbar className="mb-3" bg="light" variant="light">
         <Container>
           <Navbar.Brand href="#home">Porkrind's Emporium</Navbar.Brand>
           <Nav className="me-auto">

@@ -19,14 +19,14 @@ function EditItemModal(props: { itemProps }) {
   function handleSubmit(event) {
     event.preventDefault();
     const formData = { name, price, description, img };
-    itemProps.editFunction(itemProps.id, formData)
+    itemProps.editFunction(itemProps.id, formData);
     closeModal();
     return;
   }
 
   return (
-    <div>
-      <Button variant="primary" onClick={showModal}>
+    <>
+      <Button variant="warning" onClick={showModal}>
         Edit
       </Button>
 
@@ -75,7 +75,7 @@ function EditItemModal(props: { itemProps }) {
           </Form>
         </Modal.Body>
       </Modal>
-    </div>
+    </>
   );
 }
 
