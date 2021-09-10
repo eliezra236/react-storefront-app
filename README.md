@@ -40,5 +40,9 @@ I made some real simple design to go along with it.
 Designers are welcome to make their changes and I will merge it :)
 
 
+## Running:
+1. ```cd server``` -> ```npm run dev``` to run nodemon or ```npm build``` to deploy
+2. ```cd client``` -> ```npm start``` to run the frontend.
+
 ## License
 Free to use
