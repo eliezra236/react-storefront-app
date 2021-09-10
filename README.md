@@ -14,12 +14,14 @@ Sequelize ORM
 
 ## Getting Started
 Create a database (I used MySQL) and set up an .env file with the following:
-example:
+# example:
+```
 DB_NAME=porkrindemporium
 DB_USER=root
 DB_PASS=123456
 DB_HOST=localhost
 DB_PORT=3306
+```
 
 ### Setting Up Server
 
