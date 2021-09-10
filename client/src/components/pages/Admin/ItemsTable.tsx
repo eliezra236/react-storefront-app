@@ -39,7 +39,6 @@ function ItemsTable() {
       .put("/products/" + id, editedProduct)
       .then((res) => getProducts())
       .catch((err) => alert(err));
-    // TODO update item at DB.
   }
 
   return (
