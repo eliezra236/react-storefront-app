@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 function UniqueSalesCard(props: { sellInfo: Array<any> }) {
   return (
     <div>
-      <h5>Best Selling (Unique Orders)</h5>
+      <h5 className="state-sub-title">Best Selling (Unique Orders)</h5>
       <Table striped>
         <thead>
           <tr>

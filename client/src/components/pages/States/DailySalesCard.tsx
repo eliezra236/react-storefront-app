@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 function DailySalesCard(props: { sellInfo: Array<any> }) {
   return (
     <div>
-      <h5>Daily Sales</h5>
+      <h5 className="state-sub-title">Daily Sales</h5>
       <Table striped>
         <thead>
           <tr>

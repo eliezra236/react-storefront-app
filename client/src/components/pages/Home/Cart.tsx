@@ -11,7 +11,7 @@ function Cart(props: {
     props.removeFromCart(id);
   }
   return (
-    <Dropdown>
+    <Dropdown className="pb-3">
       <Dropdown.Toggle variant="success" id="dropdown-basic">
         Cart ({props.cartItems.length})
       </Dropdown.Toggle>

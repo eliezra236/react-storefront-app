@@ -12,10 +12,13 @@ code {
     monospace;
 }
 
-table, td, th {
-  // border: 1px solid black;
-  // border-collapse: collapse;
+td, th {
   padding: 0.7rem 1rem;
+}
+
+table {
+  margin: auto;
+  width: auto !important;
 }
 
 img {
@@ -28,11 +31,13 @@ td {
   height: 4rem;
 }
 
-.stats-tables {
-  padding: 0rem 5rem;
-  display: flex;
-  justify-content: space-between;
+.admin-table {
+  &, td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
 }
+
 
 .home-card {
   img {
@@ -55,4 +60,8 @@ td {
   cursor:pointer;
   overflow: hidden;
   outline:none;
+}
+
+.state-sub-title {
+  margin-top: 2rem;
 }

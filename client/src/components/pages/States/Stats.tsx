@@ -3,6 +3,7 @@ import axios from "../../../variables/myAxios";
 import BestSellingCard from "./BestSellingCard";
 import DailySalesCard from "./DailySalesCard";
 import UniqueSalesCard from "./UniqueSalesCard";
+import Container from "react-bootstrap/Container";
 
 function Stats() {
   const [bestSelling, setBestSelling] = useState([]);
@@ -39,7 +40,7 @@ function Stats() {
       .catch((err) => alert(err));
   }
   return (
-    <div>
+    <Container>
       <h3>Statistics</h3>
 
       <div className="stats-tables">
@@ -47,7 +48,7 @@ function Stats() {
         <UniqueSalesCard sellInfo={uniqueBestSelling} />
         <DailySalesCard sellInfo={lastDaysSales} />
       </div>
-    </div>
+    </Container>
   );
 }
 

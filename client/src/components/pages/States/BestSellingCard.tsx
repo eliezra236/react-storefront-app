@@ -4,8 +4,8 @@ import Table from "react-bootstrap/Table";
 function bestSellingCard(props: { sellInfo: Array<any> }) {
   return (
     <div>
-      <h5>Best Selling (Quanitity)</h5>
-      <Table striped>
+      <h5 className="state-sub-title">Best Selling (Quanitity)</h5>
+      <Table striped className="stats-table">
         <thead>
           <tr>
             <th>Product ID</th>

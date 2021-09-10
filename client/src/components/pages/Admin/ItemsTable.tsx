@@ -47,7 +47,7 @@ function ItemsTable() {
       <h3>All Products</h3>
 
       <AddModal submitForm={addProduct} />
-      <table>
+      <table className="admin-table">
         <thead>
           <tr>
             <th>Image</th>
