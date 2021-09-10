@@ -1,5 +1,6 @@
 # Welcome
 This is a simple react storefront, with Database (SQL) and full REST API as backend, including Sequelize.
+Using Typescript in both frontend and backend.
 
 Frontend:
 React - frontend framework
